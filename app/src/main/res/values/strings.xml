@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Teacher Manager</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="welcome_message">Welcome! Set up your classes, students, and schedule.</string>
+    <string name="title_classes">Classes</string>
+    <string name="title_students">Students</string>
+    <string name="title_attendance">Attendance</string>
+    <string name="title_assignments">Assignments</string>
+    <string name="title_messages">Messages</string>
+    <string name="title_settings">Settings</string>
+</resources>
+
+

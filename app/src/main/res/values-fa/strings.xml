@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">مدیریت معلم</string>
+    <string name="title_dashboard">داشبورد</string>
+    <string name="welcome_message">خوش آمدید! کلاس‌ها، دانش‌آموزان و برنامه‌تان را تنظیم کنید.</string>
+    <string name="title_classes">کلاس‌ها</string>
+    <string name="title_students">دانش‌آموزان</string>
+    <string name="title_attendance">حضور و غیاب</string>
+    <string name="title_assignments">تکالیف</string>
+    <string name="title_messages">پیام‌ها</string>
+    <string name="title_settings">تنظیمات</string>
+</resources>
+
+

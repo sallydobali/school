@@ -77,6 +77,9 @@ android {
     kapt("com.google.dagger:hilt-android-compiler:2.50")
     implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
 
+    // KAPT workaround for CI: explicitly add javax annotation
+    compileOnly("javax.annotation:jsr250-api:1.0")
+
     // Room (placeholders for offline DB)
     implementation("androidx.room:room-runtime:2.6.1")
     implementation("androidx.room:room-ktx:2.6.1")

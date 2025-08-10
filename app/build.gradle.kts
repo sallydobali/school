@@ -2,7 +2,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("com.google.dagger.hilt.android")
-    id("kotlin-kapt")
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -72,18 +72,18 @@ android {
     // Material Components (provides Material3 XML themes)
     implementation("com.google.android.material:material:1.11.0")
 
-    // Hilt
+    // Hilt (KSP)
     implementation("com.google.dagger:hilt-android:2.50")
-    kapt("com.google.dagger:hilt-android-compiler:2.50")
+    ksp("com.google.dagger:hilt-compiler:2.50")
     implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
 
-    // KAPT workaround for CI: explicitly add javax annotation
+    // Optional: jsr250 annotations for generated code referencing it
     compileOnly("javax.annotation:jsr250-api:1.0")
 
-    // Room (placeholders for offline DB)
+    // Room (KSP)
     implementation("androidx.room:room-runtime:2.6.1")
     implementation("androidx.room:room-ktx:2.6.1")
-    kapt("androidx.room:room-compiler:2.6.1")
+    ksp("androidx.room:room-compiler:2.6.1")
 
     // DataStore (settings)
     implementation("androidx.datastore:datastore-preferences:1.0.0")
@@ -99,8 +99,6 @@ android {
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 }
 
-kapt {
-    correctErrorTypes = true
-}
+// KSP generates sources automatically
 
 

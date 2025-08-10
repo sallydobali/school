@@ -33,11 +33,11 @@ jobs:
       - name: Create local.properties
         run: echo "sdk.dir=$ANDROID_SDK_ROOT" > local.properties
 
-      - name: Bootstrap Gradle wrapper
+      - name: Bootstrap Gradle wrapper (AGP 8.2.2 compatible)
         run: |
-          curl -L https://services.gradle.org/distributions/gradle-8.7-bin.zip -o gradle-8.7-bin.zip
-          unzip -q gradle-8.7-bin.zip -d "$GITHUB_WORKSPACE"
-          "$GITHUB_WORKSPACE/gradle-8.7/bin/gradle" wrapper --gradle-version 8.7
+          curl -L https://services.gradle.org/distributions/gradle-8.2.1-bin.zip -o gradle-8.2.1-bin.zip
+          unzip -q gradle-8.2.1-bin.zip -d "$GITHUB_WORKSPACE"
+          "$GITHUB_WORKSPACE/gradle-8.2.1/bin/gradle" wrapper --gradle-version 8.2.1
           chmod +x gradlew
 
       - name: Verify environment
@@ -45,6 +45,9 @@ jobs:
           java -version
           sdkmanager --sdk_root="$ANDROID_SDK_ROOT" --list | head -n 50 || true
           ./gradlew -v
+
+      - name: Gradle clean
+        run: ./gradlew clean --no-daemon --stacktrace --info
 
       - name: Build Debug APK
         run: ./gradlew :app:assembleDebug -Pandroid.defaults.buildfeatures.buildconfig=true --no-daemon --stacktrace --info

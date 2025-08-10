@@ -12,6 +12,8 @@ jobs:
     defaults:
       run:
         working-directory: school
+    permissions:
+      contents: read
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -27,7 +29,9 @@ jobs:
 
       - name: Install Android packages
         run: |
+          yes | sdkmanager --sdk_root="$ANDROID_SDK_ROOT" "cmdline-tools;latest"
           yes | sdkmanager --sdk_root="$ANDROID_SDK_ROOT" "platforms;android-34" "build-tools;34.0.0" "platform-tools"
+          yes | sdkmanager --sdk_root="$ANDROID_SDK_ROOT" --licenses
 
       - name: Create local.properties
         run: echo "sdk.dir=$ANDROID_SDK_ROOT" > local.properties
@@ -37,9 +41,16 @@ jobs:
           curl -L https://services.gradle.org/distributions/gradle-8.2.1-bin.zip -o gradle-8.2.1-bin.zip
           unzip -q gradle-8.2.1-bin.zip -d "$GITHUB_WORKSPACE"
           "$GITHUB_WORKSPACE/gradle-8.2.1/bin/gradle" wrapper --gradle-version 8.2.1
+          chmod +x gradlew
+
+      - name: Verify environment
+        run: |
+          java -version
+          sdkmanager --sdk_root="$ANDROID_SDK_ROOT" --list | head -n 50 || true
+          ./gradlew -v
 
       - name: Build Debug APK
-        run: ./gradlew :app:assembleDebug --no-daemon --stacktrace
+        run: ./gradlew :app:assembleDebug --no-daemon --stacktrace --info
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4

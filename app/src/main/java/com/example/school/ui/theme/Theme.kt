@@ -17,10 +17,11 @@ private val LightColors = lightColorScheme()
 @Composable
 fun TeacherAppTheme(
     useDarkTheme: Boolean = isSystemInDarkTheme(),
+    useDynamicColor: Boolean = true,
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {
-        Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
+        useDynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
             val context = LocalContext.current
             if (useDarkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
         }

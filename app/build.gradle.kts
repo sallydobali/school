@@ -11,10 +11,11 @@ android {
 
     defaultConfig {
         applicationId = "com.example.school"
-        minSdk = 24
+        minSdk = 23
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
+        multiDexEnabled = true
 
         vectorDrawables.useSupportLibrary = true
     }
@@ -61,6 +62,7 @@ android {
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
     implementation("androidx.activity:activity-compose:1.8.2")
     implementation("androidx.navigation:navigation-compose:2.7.7")
+    implementation("androidx.multidex:multidex:2.0.1")
 
     // Compose
     implementation("androidx.compose.ui:ui")

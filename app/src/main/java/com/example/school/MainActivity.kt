@@ -21,6 +21,7 @@ import com.example.school.navigation.Routes
 import com.example.school.ui.screens.*
 import androidx.compose.foundation.layout.padding
 import androidx.compose.ui.Modifier
+import androidx.compose.foundation.layout.PaddingValues
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -32,9 +33,8 @@ class MainActivity : ComponentActivity() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AppRoot() {
+private fun AppScaffold(content: @Composable (PaddingValues) -> Unit) {
     TeacherAppTheme {
-        val navController = rememberNavController()
         Scaffold(
             topBar = {
                 CenterAlignedTopAppBar(
@@ -42,20 +42,26 @@ fun AppRoot() {
                     title = { Text(text = stringResource(id = R.string.title_dashboard)) }
                 )
             }
-        ) { innerPadding ->
-            NavHost(
-                navController = navController,
-                startDestination = Routes.DASHBOARD,
-                modifier = Modifier.padding(innerPadding)
-            ) {
-                composable(Routes.DASHBOARD) { DashboardScreen() }
-                composable(Routes.CLASSES) { ClassesScreen() }
-                composable(Routes.STUDENTS) { StudentsScreen() }
-                composable(Routes.ATTENDANCE) { AttendanceScreen() }
-                composable(Routes.ASSIGNMENTS) { AssignmentsScreen() }
-                composable(Routes.MESSAGES) { MessagesScreen() }
-                composable(Routes.SETTINGS) { SettingsScreen() }
-            }
+        ) { innerPadding -> content(innerPadding) }
+    }
+}
+
+@Composable
+fun AppRoot() {
+    val navController = rememberNavController()
+    AppScaffold { innerPadding ->
+        NavHost(
+            navController = navController,
+            startDestination = Routes.DASHBOARD,
+            modifier = Modifier.padding(innerPadding)
+        ) {
+            composable(Routes.DASHBOARD) { DashboardScreen() }
+            composable(Routes.CLASSES) { ClassesScreen() }
+            composable(Routes.STUDENTS) { StudentsScreen() }
+            composable(Routes.ATTENDANCE) { AttendanceScreen() }
+            composable(Routes.ASSIGNMENTS) { AssignmentsScreen() }
+            composable(Routes.MESSAGES) { MessagesScreen() }
+            composable(Routes.SETTINGS) { SettingsScreen() }
         }
     }
 }
@@ -71,7 +77,11 @@ fun DashboardScreen() {
 @Preview(showBackground = true)
 @Composable
 fun AppPreview() {
-    AppRoot()
+    TeacherAppTheme(useDynamicColor = false) {
+        AppScaffold { _ ->
+            DashboardScreen()
+        }
+    }
 }
 
 

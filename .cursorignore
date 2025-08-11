@@ -1,0 +1,22 @@
+# Android/Gradle build outputs and caches
+.gradle/
+build/
+app/build/
+**/build/
+.cxx/
+.kotlin/
+
+# IDE/Tooling
+.idea/
+*.iml
+.cxx/
+.cxx-cache/
+
+# Large binaries
+*.apk
+*.aab
+captures/
+
+# OS/others
+.DS_Store
+local.properties

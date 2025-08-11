@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /.gradle/
 /build/
 /app/build/
@@ -6,5 +7,20 @@ local.properties
 *.iml
 *.keystore
 *.jks
+=======
+# Android & Gradle
+**/.gradle/
+**/build/
+**/captures/
+**/outputs/
+**/local.properties
+**/.idea/
+**/.DS_Store
+**/*.iml
+
+# OS junk
+Thumbs.db
+*.log
+>>>>>>> 673fb8a (chore(ci): add GitHub Actions workflow to build debug APK)
 
 
